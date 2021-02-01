@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brick Breaker Game</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="breakout.js" defer></script>
+    <script src="database.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+</head>
+<body>
+  <nav id="navbar">
+    <ul>
+      <li class="dropdown">
+        <a href="index.html" class="dropbtn">Home</a>
+        <div class ="dropdown-content">
+        </div>
+      </li>
+     <li class="dropdown">
+         <a href="#" class="dropbtn">Account</a>
+         <div class="dropdown-content">
+           <a href="login.html">Login</a>
+           <a href="register.html">Register</a>
+         </div>
+       </li>
+     </ul>
+  </nav>
+    <h1>Breakout Game</h1>
+    <p id="controls">
+     Controls: <br>
+     Left Arrow Key or "A" Key: Move Paddle Left <br>
+     Right Arrow Key or "D" Key: Move Paddle Right <br>
+     "P" Key: Pause or Unpause Game <br>
+    </p>
+    <div id="canvasDiv">
+    <canvas id="breakoutCanvas" width="480" height="320" style="border:1px solid #000000;"></canvas>
+    </div>
+    <div id="button-container">
+      <button id="save-button">Save Game to File</button>
+      <a download="save.json" id="downloadlink" style="display: none">Download</a>
+      <button id="load-button" onclick="loadGame()">Load Game From File</button>
+      <label for="saveFile" id="saveLabel">SELECT SAVE FILE</label>
+      <input type="file" id="saveFile" accept=".json"> <br> <br>
+    </div>
+    <div id="database-save-container">
+    <button id="save-database" onclick="saveToServer()">Save Game to Database</button>
+    <button id="load-database" onclick="loadFromDatabase()">Load Game In Database</button> <br> <br>
+   </div>
+</body>
+</html>
