@@ -82,7 +82,7 @@ function keyPressUp(event)
 
 function pauseListener(event)
 {
-	if(event.key == "p")
+	if(event.key == "p" || event.key == "P")
 	{
 		if(paused == false)
 		{
@@ -120,7 +120,7 @@ function detectCollision()
 function drawGameState()
 {
 	ctx.font = "16px Arial"; 
-	ctx.fillStyle = "#f9f9f9";
+	ctx.fillStyle = "#ffffff";
 	ctx.fillText("Score: " + score, 8, 20);
 	ctx.fillText("Lives: " + lives, canvas.width - 65, 20);
 }
@@ -129,7 +129,7 @@ function drawBall()
 {
 	ctx.beginPath();
 	ctx.arc(xPos, yPos, ballRadius, 0, Math.PI * 2);
-	ctx.fillStyle = "#f9f9f9";
+	ctx.fillStyle = "#ffffff";
 	ctx.fill();
 	ctx.closePath();
 }
@@ -138,7 +138,7 @@ function drawPaddle()
 {
     ctx.beginPath();
     ctx.rect(paddleOffset, canvas.height-paddleHeight, paddleLength, paddleHeight);
-    ctx.fillStyle = "#f9f9f9";
+    ctx.fillStyle = "#ffffff";
     ctx.fill();
     ctx.closePath();
 }
@@ -157,7 +157,7 @@ function drawBlocks()
 				blocks[cols][rows].y = blockYPos;
 				ctx.beginPath(); 
 				ctx.rect(blockXPos, blockYPos, blockWidth, blockHeight); 
-				ctx.fillStyle = "#f9f9f9";
+				ctx.fillStyle = "#ffffff";
 				ctx.fill(); 
 				ctx.closePath(); 
 			}

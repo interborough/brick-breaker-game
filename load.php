@@ -1,8 +1,14 @@
 <?php
 
 session_start();
-//PERSONAL DATABASE INFO REMOVED
-$db = mysqli_connect('hostname', 'username', 'password', 'schema') or die("Could not connect to database");
+
+//Note: Database information removed for Github.
+$server_hostname = "";
+$server_username = "";
+$server_password = "";
+$server_dbname = "";
+
+$db = mysqli_connect($server_hostname, $server_username, $server_password, $server_dbname) or die ("Could not connect to database.");
 
 if(isset($_SESSION['username']))
 {
@@ -24,6 +30,7 @@ if(isset($_SESSION['username']))
     $data = ['score' => $score, 'lives' => $lives, 'paddle' => $paddle, 'ballx' => $ballx, 'bally' => $bally, 'ballxdist' => $ballxdist, 'ballydist' => $ballydist, 'blocks' => $blocks];  
 
     mysqli_close($db);
+    echo json_encode($data);
 }
 else
 {

@@ -8,12 +8,12 @@
 }
 
 html {
-    background-color: rgb(55, 83, 108);  
+    background-color: rgb(40, 38, 44);  
 }
 
 h1 {
     padding-top: 2%; 
-    color: #f9f9f9;
+    color: white;
     text-align: center;
     text-decoration-line: underline;
 }
@@ -45,7 +45,7 @@ a {
 }
   
 #navbar {
-    background-color: rgb(41, 61, 81);
+    background-color: rgb(50, 47, 55);
 }
   
 .dropbtn {
@@ -57,7 +57,7 @@ a {
 }
   
 li a:hover {
-    background-color: #34495e;
+    background-color: rgb(40, 38, 44);  
 }
   
 .dropdown {
@@ -80,7 +80,9 @@ li a:hover {
     text-align: left;
 }
   
-.dropdown-content a:hover {background-color: #eeeeee;}
+.dropdown-content a:hover {
+    background-color: #eeeeee;
+}
   
 .dropdown:hover .dropdown-content {
     display: block;
@@ -93,12 +95,13 @@ li a:hover {
 }
 
 #canvasDiv {
-    padding-top: 7%; 
-    padding-bottom: 0.5%; 
+    padding-top: 2%; 
+    padding-bottom: 2%; 
 }
 
 canvas {
-    background: rgb(41, 61, 81);; 
+    background: rgb(50, 47, 55);
+    outline: white 3px solid;
     display: block; 
     margin: 0 auto; 
 }
@@ -118,7 +121,7 @@ canvas {
 #save-button:hover, #load-button:hover, #save-database:hover, #load-database:hover {
     width: 120px;
     height: 40px;
-    background-color: rgb(41, 61, 81);
+    background-color: rgb(50, 47, 55);
     border-radius: 5px;
     border: 2px solid; 
     text-transform: uppercase; 
@@ -149,7 +152,7 @@ input[type="file"] {
   width: 120px; 
   height: 40px; 
   border: 2px solid white; 
-  background-color: rgb(41, 61, 81); ;
+  background-color: rgb(50, 47, 55);
   color: white; 
   border-radius: 5px;
   display: inline-block;
@@ -163,17 +166,18 @@ input[type="file"] {
   text-align: center; 
 }
 
-#login-div {
+#login-div, #register-div {
+    padding-top: 2%;
     display: flex; 
     justify-content: center;
 }
 
 .label {
     font-size: 20px; 
-    color: #f9f9f9; 
+    color: white; 
 }
 
-#login {
+#login, #register {
     width: 110px;
     height: 40px;
     background-color: transparent;
@@ -185,10 +189,10 @@ input[type="file"] {
     font-weight: bold;
 }
 
-#login:hover {
+#login:hover, #register:hover {
     width: 110px;
     height: 40px;
-    background-color: rgb(41, 61, 81);
+    background-color: rgb(50, 47, 55);
     border-radius: 5px;
     border: 2px solid; 
     text-transform: uppercase; 
@@ -198,46 +202,17 @@ input[type="file"] {
 }
 
 h2 {
-    color: #f9f9f9;
+    color: white;
     padding-bottom: 2%;
     text-align: center;
     text-decoration-line: underline;
 }
 
 p {
-    color: #f9f9f9;
-}
-
-#register-div {
-    display: flex; 
-    justify-content: center;
+    color: white;
 }
 
 .label {
     font-size: 20px; 
-    color: #f9f9f9; 
-}
-
-#register {
-    width: 110px;
-    height: 40px;
-    background-color: transparent;
-    border-radius: 5px;
-    border: 2px solid; 
-    text-transform: uppercase; 
     color: white; 
-    font-size: 15px;
-    font-weight: bold;
-}
-
-#register:hover {
-    width: 110px;
-    height: 40px;
-    background-color: rgb(41, 61, 81);
-    border-radius: 5px;
-    border: 2px solid; 
-    text-transform: uppercase; 
-    color: white; 
-    font-weight: bold;
-    cursor: pointer;
 }

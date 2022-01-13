@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Save Game to Database</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
 <?php
 session_start();
-//PERSONAL DATABASE INFO REMOVED
-$db = mysqli_connect('hostname', 'username', 'password', 'schema') or die("Could not connect to database");
+
+//Note: Database information removed for Github.
+$server_hostname = "";
+$server_username = "";
+$server_password = "";
+$server_dbname = "";
+
+$db = mysqli_connect($server_hostname, $server_username, $server_password, $server_dbname) or die ("Could not connect to database.");
+
 $saveGame = $_POST['gamestate'];
 
 $currScore = $saveGame['currScore']; 
@@ -43,18 +41,14 @@ if(isset($_SESSION['username']))
         $insert_results = mysqli_query($db, $insert_query);
     }
 
-    echo("Save successful!");
     mysqli_close($db);
-    header("refresh:3; url=index.html");
+    echo "Save Successful!";
 }
 else
 {
     //User is not logged in.
     mysqli_close($db);
-    echo("Please login to save to the database. Redirecting in 3 seconds..."); 
-    header("refresh:3; url=index.html"); 
+    echo "Please login to save to the database.";
 }
 
 ?>
-</body>
-</html>

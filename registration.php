@@ -3,31 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registration</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Account Registration</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 <?php
-
-//Login users
 session_start();
-//PERSONAL DATABASE INFO REMOVED
-$db = mysqli_connect('hostname', 'username', 'password', 'schema') or die("Could not connect to database");
+
+//Note: Database information removed for Github.
+$server_hostname = "";
+$server_username = "";
+$server_password = "";
+$server_dbname = "";
+
+$db = mysqli_connect($server_hostname, $server_username, $server_password, $server_dbname) or die ("Could not connect to database.");
+
 $username = $_POST['username'];
 $password = $_POST['password'];
+$confirmpassword = $_POST['confirmpassword'];
+$errors = array();
 
 if(isset($_POST['login']))
  {
-    $errors = array();
-
     if(empty($username))
     {
-        array_push($errors, "Username is required");
+        array_push($errors, "A username is required for account creation.");
     }
     if(empty($password))
     {
-        array_push($errors, "Password is required");
+        array_push($errors, "A password is required for account creation.");
     }
+
     if(count($errors) == 0)
     {
         $password = md5($password);
@@ -37,13 +43,11 @@ if(isset($_POST['login']))
         if(mysqli_num_rows($results)) 
         {
             $_SESSION['username'] = $username;
-            $_SESSION['success'] = "Logged in Successfully";
-
-            echo "<p style='color:white;'>" . "You are now logged in. Redirecting in 3 seconds..." . "</p>";
+            echo "<p style='color:white;'>" . "You are now logged in. Redirecting in 3 seconds." . "</p>";
         }
         else
         {
-            array_push($errors, "Wrong username and password combination. Please try again. Redirecting in 3 seconds...");
+            array_push($errors, "Account not found. Please try again.");
         }
     }
 
@@ -52,27 +56,21 @@ if(isset($_POST['login']))
  }
  else
  {
-   session_start();
    $errors = array();
-
-   //Register users
-   $confirmpassword = $_POST['confirmpassword'];
-
-   //form validation
 
    if(empty($username))
    {
-      array_push($errors, "Username is required");
+      array_push($errors, "A username is required to login.");
    } 
 
    if(empty($password))
    {
-      array_push($errors, "Password is required");
+      array_push($errors, "A password is required to login.");
    } 
 
    if($password != $confirmpassword)
    {
-      array_push($errors, "Password do not match");
+      array_push($errors, "The passwords do not match.");
    }
 
    //check database for existing user with same username
@@ -85,7 +83,7 @@ if(isset($_POST['login']))
    {
       if($user["username"] === $username)
       {
-          array_push($errors, "This username is already registered");
+          array_push($errors, "This username is already registered.");
       }
    }
 
@@ -99,9 +97,8 @@ if(isset($_POST['login']))
       mysqli_query($db, $query);
 
       $_SESSION['username'] = $username;
-      $_SESSION['success'] = "You are now registered.";
 
-      echo "<p style='color:white;'>" . "You are now registered. Redirecting in 3 seconds..." . "</p>";
+      echo "<p style='color:white;'>" . "You are now registered. Redirecting in 3 seconds." . "</p>";
       mysqli_close($db);
       header("refresh:3; url=index.html"); 
    }
@@ -114,10 +111,9 @@ if(isset($_POST['login']))
     <?php foreach($errors as $error) : ?>
     <p><?php echo $error ?></p>
     <?php endforeach ?>
-    <!--redirect to login.php after 3 seconds-->
-    <?php header("Refresh:3; url=login.php"); ?>
+    <p><?php echo "<p style='color:white;'>" . "Redirecting in 3 seconds." . "</p>"; ?></p>
+    <?php header("Refresh:3; url=login.html"); ?>
     </div>
-    
     <?php endif ?>
 </body>
 </html>
