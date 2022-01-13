@@ -1,5 +1,5 @@
 # Brick Breaker Game
-A website that allows the user to play a brick breaker clone. Created using HTML, CSS, Javascript, jQuery, PHP, and MySQL. Currently this website is not deployed anywhere. 
+A website that allows the user to play a brick breaker clone. Created using HTML, CSS, Javascript, jQuery, PHP, and MySQL. 
 
 ## How to Play
 The goal of the game is to destroy all of the bricks that are on screen. Using the left and right arrow keys (or the "W" and "D" keys), you are able to move the paddle left and right across the screen. Hit the ball with the paddle and try to get the ball to hit the bricks. If you need to pause the game at any time, press the "P" key. After all the bricks are destroyed, a message will be displayed stating that you've won. 
