@@ -32,7 +32,7 @@ function loadFromDatabase() {
         blocks = data["blocks"]; 
         alert("Load Successful!");
       }
-      catch {alert(data)}
+      catch {alert(data);}
     }
   });
 }

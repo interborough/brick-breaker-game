@@ -14,23 +14,37 @@ if(isset($_SESSION['username']))
 {
     $username = $_SESSION['username']; 
 
-    $load_query = "SELECT * FROM saves WHERE username = '$username' LIMIT 1";   
-    $load_results = mysqli_query($db, $load_query);
-    $array = mysqli_fetch_assoc($load_results);
+    $load_query = "SELECT * FROM saves WHERE username = ? LIMIT 1";
+    $stmt = $db->prepare($load_query); 
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $array = $result->fetch_assoc();
 
-    $score = $array["score"]; 
-    $lives = $array["lives"]; 
-    $paddle = $array["paddle"]; 
-    $ballx = $array["ballx"]; 
-    $bally = $array["bally"];
-    $ballxdist = $array["ballxdist"]; 
-    $ballydist = $array['ballydist']; 
-    $blocks = json_decode($array["blocks"]); 
-
-    $data = ['score' => $score, 'lives' => $lives, 'paddle' => $paddle, 'ballx' => $ballx, 'bally' => $bally, 'ballxdist' => $ballxdist, 'ballydist' => $ballydist, 'blocks' => $blocks];  
+    if($array) 
+    {
+        //Load save game.
+        $score = $array["score"]; 
+        $lives = $array["lives"]; 
+        $paddle = $array["paddle"]; 
+        $ballx = $array["ballx"]; 
+        $bally = $array["bally"];
+        $ballxdist = $array["ballxdist"]; 
+        $ballydist = $array['ballydist']; 
+        $blocks = json_decode($array["blocks"]); 
+    
+        $data = ['score' => $score, 'lives' => $lives, 'paddle' => $paddle, 'ballx' => $ballx, 'bally' => $bally, 'ballxdist' => $ballxdist, 'ballydist' => $ballydist, 'blocks' => $blocks];  
+        
+        echo json_encode($data);
+    }
+    else 
+    {
+        //No save game in database. 
+        mysqli_close($db);
+        echo "No saved game found in the database.";
+    }
 
     mysqli_close($db);
-    echo json_encode($data);
 }
 else
 {

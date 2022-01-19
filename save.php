@@ -25,20 +25,28 @@ if(isset($_SESSION['username']))
     $username = $_SESSION['username']; 
 
     //Check if user is in database
-    $search_query = "SELECT username FROM saves WHERE username = '$username'"; 
-    $search_results = mysqli_query($db, $search_query);
-    
-    if(mysqli_num_rows($search_results))
+    $search_query = "SELECT username FROM saves WHERE username = ?";
+    $stmt = $db->prepare($search_query); 
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $array = $result->fetch_assoc();
+
+    if($array) 
     {
-        //User already in database, update save. 
-        $update_query = "UPDATE saves SET score = '$currScore', lives = '$currLives', paddle = '$paddlePos', ballx = '$ballXPos', bally = '$ballYPos', ballxdist = '$ballxDist', ballydist = '$ballYDist', blocks = '$blockArray' WHERE username = '$username'"; 
-        $update_results = mysqli_query($db, $update_query);
+        //User already in database, update save.
+        $update_query = "UPDATE saves SET score = ?, lives = ?, paddle = ?, ballx = ?, bally = ?, ballxdist = ?, ballydist = ?, blocks = ? WHERE username = ?"; 
+        $stmt = $db->prepare($update_query); 
+        $stmt->bind_param("iidddddss", $currScore, $currLives, $paddlePos, $ballXPos, $ballYPos, $ballxDist, $ballYDist, $blockArray, $username);
+        $stmt->execute();
     }
-    else
+    else 
     {
         //User not in database, create save.
-        $insert_query = "INSERT INTO saves (username, score, lives, paddle, ballx, bally, ballxdist, ballydist, blocks) VALUES ('$username', '$currScore', '$currLives', '$paddlePos', '$ballXPos', '$ballYPos', '$ballxDist', '$ballYDist', '$blockArray')";  
-        $insert_results = mysqli_query($db, $insert_query);
+        $insert_query = "INSERT INTO saves (username, score, lives, paddle, ballx, bally, ballxdist, ballydist, blocks) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
+        $stmt = $db->prepare($insert_query); 
+        $stmt->bind_param("siiddddds", $username, $currScore, $currLives, $paddlePos, $ballXPos, $ballYPos, $ballxDist, $ballYDist, $blockArray);
+        $stmt->execute();
     }
 
     mysqli_close($db);
